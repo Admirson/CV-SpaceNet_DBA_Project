@@ -1,6 +1,6 @@
 import pyodbc
 
-# Conexão usando DSN configurado
+# Conexão usando ODBC DSN
 conn = pyodbc.connect("DSN=PostgreSQL35W;UID=postgres;PWD=FzSecret@24")
 
 cursor = conn.cursor()
@@ -10,4 +10,3 @@ for row in cursor.fetchall():
     print(row)
 
 conn.close()
-# alteração for Gilson
