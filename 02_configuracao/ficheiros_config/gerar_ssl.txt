@@ -1,3 +1,9 @@
-// Comando para gerar certificado SSL autoassinado para PostgreSQL no Windows
+// Comando para gerar certificado SSL autoassinado para PostgreSQL no Windows com um ano de validade
 "C:\Program Files\OpenSSL-Win64\bin\openssl.exe" req -new -x509 -days 365 -nodes -text -out "C:\Program Files\PostgreSQL\18\data\server.crt" -keyout "C:\Program Files\PostgreSQL\18\data\server.key"
 // o comando acima gera um certificado SSL autoassinado válido por 365 dias e salva os arquivos server.crt e server.key no diretório de dados do PostgreSQL.
+
+Ao fazer isso o serviço postgresql iniciou sem problemas.
+
+confirmando que o PostgreSQL está funcionando corretamente com SSL habilitado.
+
+a justificação técnica de usar ssl é que ele fornece uma camada adicional de segurança para a comunicação entre o cliente e o servidor PostgreSQL. O SSL (Secure Sockets Layer) criptografa os dados transmitidos, protegendo informações sensíveis contra interceptação.
