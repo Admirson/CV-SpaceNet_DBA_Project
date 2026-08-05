@@ -258,6 +258,27 @@ def executar_validar(conn, opcao):
     finally:
         cur.close()
 
+def validar_ambiente_postgresql(conn):
+    print("\n--- Validação do Ambiente PostgreSQL ---")
+    try:
+        with conn.cursor() as cur:
+            cur.execute("SELECT current_database();")
+            print("[INFO] Base de dados atual:", cur.fetchone()[0])
+
+            cur.execute("SELECT current_user;")
+            print("[INFO] Utilizador atual:", cur.fetchone()[0])
+
+            cur.execute("SELECT current_timestamp;")
+            print("[INFO] Data/Hora do servidor:", cur.fetchone()[0])
+
+            cur.execute("SELECT version();")
+            print("[INFO] Versão do PostgreSQL:", cur.fetchone()[0])
+
+            cur.execute("SELECT inet_server_addr();")
+            print("[INFO] Endereço do servidor:", cur.fetchone()[0])
+    except Exception as e:
+        print("[ERRO] ao validar ambiente PostgreSQL:", e)
+        conn.rollback()
 
 def main():
     user_info = menu_utilizadores()
@@ -270,39 +291,42 @@ def main():
     if not conn:
         return
 
+    # Validação automática logo após login
+    validar_ambiente_postgresql(conn)
+
     while True:
         opcao = menu_principal()
-        if opcao == "1":  # Operações em tabelas
+        if opcao == "1":
             tabela = menu_tabelas()
-            if not tabela:  # se escolher "Voltar"
+            if not tabela:
                 continue
             operacao = menu_operacoes()
-            if operacao == "0":  # se escolher "Voltar"
+            if operacao == "0":
                 continue
             executar_operacao(conn, tabela, operacao)
 
-        elif opcao == "2":  # Administração
+        elif opcao == "2":
             while True:
                 admin_op = menu_admin()
                 if admin_op == "0":
                     break
                 executar_admin(conn, admin_op)
 
-        elif opcao == "3":  # Validar Configurações
+        elif opcao == "3":
             while True:
                 validar_op = menu_validar()
                 if validar_op == "0":
                     break
                 executar_validar(conn, validar_op)
 
-        elif opcao == "0":  # Sair
+        elif opcao == "0":
+            print("[INFO] Encerrando aplicação...")
             break
 
         else:
-            print("Opção inválida.")
+            print("[ERRO] Opção inválida.")
 
     conn.close()
-
 
 if __name__ == "__main__":
     main()
