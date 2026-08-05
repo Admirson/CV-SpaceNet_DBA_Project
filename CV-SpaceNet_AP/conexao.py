@@ -5,7 +5,7 @@ SERVER = "localhost"
 PORT = 50484  # porta alterada conforme informado
 DATABASE = "postgres"
 UID = "postgres"
-PWD = "FzSecret@24"
+PWD = "********"
 
 def try_pyodbc_connect():
     drivers = pyodbc.drivers()
