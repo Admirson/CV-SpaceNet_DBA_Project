@@ -1,6 +1,21 @@
 /* ============================================================
 	PERMISSÕES POR PERFIL - PRINCÍPIO DO MENOR PRIVILÉGIO
    ============================================================ */
+/* ============================================================
+   USAGE PARA TODOS OS UTILIZADORES EM TODOS OS SCHEMAS
+   ============================================================ */
+
+-- Schema core
+GRANT USAGE ON SCHEMA core TO dba, programador, gestor, analista, auditor, aplicacao;
+
+-- Schema pesca
+GRANT USAGE ON SCHEMA pesca TO dba, programador, gestor, analista, auditor, aplicacao;
+
+-- Schema meteo
+GRANT USAGE ON SCHEMA meteo TO dba, programador, gestor, analista, auditor, aplicacao;
+
+-- Schema geo
+GRANT USAGE ON SCHEMA geo TO dba, programador, gestor, analista, auditor, aplicacao;
 
 /* ------------------------------------------------------------
 	PERFIL DBA – Administração total
