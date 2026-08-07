@@ -1,5 +1,5 @@
 /* ============================================================
-   4. CRIAR ÍNDICES
+   CRIAR ÍNDICES
    ============================================================ */
 CREATE INDEX idx_evento_data ON pesca.evento_pesca_ilegal(data_evento);
 CREATE INDEX idx_embarcacao_nome ON pesca.embarcacao(nome);
@@ -7,7 +7,7 @@ CREATE INDEX idx_bruma_data ON meteo.observacao_bruma(data_observacao);
 CREATE INDEX idx_imagem_data ON geo.imagem(data_captura);
 
 /* ============================================================
-   5. CRIAR VIEWS
+   CRIAR VIEWS
    ============================================================ */
 
 /* ------------------------------------------------------------
